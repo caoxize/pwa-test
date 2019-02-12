@@ -23,7 +23,7 @@
       $('#isSupport').text('支持');
 
       // 开始注册service workers
-      navigator.serviceWorker.register('./sw-demo-cache.js', {
+      navigator.serviceWorker.register('./sw-test-cache.js', {
         scope: './'
       }).then(function (registration) {
         $('#isSuccess').text('注册成功');
