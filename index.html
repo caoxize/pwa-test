@@ -16,7 +16,7 @@
       console.log('浏览器是否支持: 支持');
       navigator.serviceWorker.register('./sw-test-cache.js', {
         scope: './'
-      }).then(registration => {
+      }).then(function (registration) {
         console.log('service worker是否注册成功: 成功');
         let serviceWorker = null;
         if (registration.installing) {
@@ -32,11 +32,11 @@
 
         if (serviceWorker) {
           console.log('当前service worker状态：', serviceWorker.state);
-          serviceWorker.addEventListener('stateChange', () => {
+          serviceWorker.addEventListener('stateChange', function (e) {
             console.log('状态变化为: ', e.target.state);
           })
         }
-      }).catch(err => {
+      }).catch(function (err) {
         console.log('service worker是否注册成功: 失败');
       })
     } else {
