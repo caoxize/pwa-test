@@ -1,7 +1,8 @@
 var VERSION = 'v1';
 
 // 缓存
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function (event) {
+  console.log('sw install', event);
   event.waitUntil(
     caches.open(VERSION).then(function (cache) {
       return cache.addAll([
@@ -14,6 +15,7 @@ self.addEventListener('install', function(event) {
 
 // 缓存更新
 self.addEventListener('activate', function (event) {
+  console.log('sw activate', event);
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
       return Promise.all(
