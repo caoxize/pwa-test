@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PWA测试</title>
+</head>
+
+<body>
+  <p><img src="./static/banner.jpg" alt="image" /></p>
+  <script src="./static/jquery-3.3.1.min.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      console.log('浏览器是否支持: 支持');
+      navigator.serviceWorker.register('./sw-test-cache.js', {
+        scope: './'
+      }).then(registration => {
+        console.log('service worker是否注册成功: 成功');
+        let serviceWorker = null;
+        if (registration.installing) {
+          serviceWorker = registration.installing;
+          console.log('当前注册状态: installing');
+        } else if (registration.waiting) {
+          serviceWorker = registration.waiting;
+          console.log('当前注册状态: waiting');
+        } else if (registration.active) {
+          serviceWorker = registration.active;
+          console.log('当前注册状态: active');
+        }
+
+        if (serviceWorker) {
+          console.log('当前service worker状态：', serviceWorker.state);
+          serviceWorker.addEventListener('stateChange', () => {
+            console.log('状态变化为: ', e.target.state);
+          })
+        }
+      }).catch(err => {
+        console.log('service worker是否注册成功: 失败');
+      })
+    } else {
+      console.log('浏览器是否支持: 不支持');
+    }
+  </script>
+</body>
+
+</html>
