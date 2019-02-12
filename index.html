@@ -25,7 +25,7 @@
       // 开始注册service workers
       navigator.serviceWorker.register('./sw-test-cache.js', {
         scope: './'
-      }).then(function (registration) {
+      }).then(registration => {
         $('#isSuccess').text('注册成功');
 
         var serviceWorker;
@@ -41,11 +41,11 @@
         }
         if (serviceWorker) {
           $('#swState').text(serviceWorker.state);
-          serviceWorker.addEventListener('statechange', function (e) {
+          serviceWorker.addEventListener('statechange', e => {
             $('#swState').append('&emsp;状态变化为' + e.target.state);
           });
         }
-      }).catch(function (error) {
+      }).catch(() => {
         $('#isSuccess').text('注册没有成功');
       });
     } else {
